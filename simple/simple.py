@@ -1,3 +1,3 @@
 import os
-Value = os.environ['INPUT_STORE']
-print("Attaching ValueA and ValueB = ", Value)
+a = os.environ['INPUT_STORE']
+print("Attaching Value1 and Value2 = ", a)
