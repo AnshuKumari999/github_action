@@ -1,32 +1,80 @@
 
-name: Workflow
+# name: Workflow
+
+# on:
+#   push:
+#     branches: [ "master" ]
+#   pull_request:
+#     branches: [ "master" ]
+
+
+# jobs:
+#  first_job:
+#   name: job1
+#   runs-on: windows-latest
+#   steps:
+#     - uses: actions/checkout@v3
+#     - uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.10' 
+#     - run: python fun.py
+    
+#  second_job:
+#     name: Job2
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v3
+#     - uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.10' 
+#     - run: python fun.py
+    
+    
+name: workflow
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  
 
+  workflow_dispatch:
+    inputs:
+      Value1:
+        description: 'First Name'
+        required: true
+        default: '--'
+        
+        
 
+      Value2:
+        description: 'Last Name'
+        required: true
+        default: '--'
+        
+        
+
+  
 jobs:
- first_job:
-  name: job1
-  runs-on: windows-latest
-  steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10' 
-    - run: python fun.py
-    
- second_job:
-    name: Job2
+  run-python-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.10' 
-    - run: python fun.py
+  
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        
+  
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: 3.8
+  
+      - name: Execute Test Script
+        run: INPUT_STORE=${{ github.event.inputs.Value1 }}${{ github.event.inputs.Value2 }} python3 scripts/test.py
+
+
+      
+      
+      
+            
+   
     
+-GithubActions-CEQ508-PRAC2/main.yml at master · iamarjotsingh/-
         
